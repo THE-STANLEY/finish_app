@@ -5,17 +5,21 @@ var themeData = ThemeData(
     seedColor: const Color.fromARGB(255, 8, 84, 146),
   ),
   useMaterial3: true,
+  scaffoldBackgroundColor: Colors.white70,
   textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontSize: 25,
         fontWeight: FontWeight.bold,
-        color: Colors.purple,
+        color: Colors.orange,
         fontFamily: 'MainStyle',
       ),
       titleMedium: TextStyle(
-          color: Colors.purple, fontSize: 25, fontWeight: FontWeight.bold)),
+          color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+      labelMedium: TextStyle(
+          color: Colors.orange, fontSize: 17, fontWeight: FontWeight.normal)),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    selectedItemColor: Colors.purple,
+    selectedItemColor: Colors.orange,
+    unselectedItemColor: Colors.grey,
   ),
   dividerColor: Colors.white24,
 );
