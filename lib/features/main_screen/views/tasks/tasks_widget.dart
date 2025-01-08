@@ -56,8 +56,8 @@ class _TasksWidgetState extends State<TasksWidget> {
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          color: const Color.fromARGB(99, 158, 158, 158),
-                          borderRadius: BorderRadius.circular(20)),
+                          color: const Color.fromARGB(33, 158, 158, 158),
+                          borderRadius: BorderRadius.circular(10)),
                       child: TextFormField(
                         decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.search),
@@ -82,7 +82,7 @@ class _TasksWidgetState extends State<TasksWidget> {
                   return ListTile(
                     tileColor: Colors.white,
                     leading: const Icon(Icons.folder_open_outlined),
-                    title: Text(tasks.label,
+                    title: Text(tasks,
                         style: const TextStyle(fontWeight: FontWeight.w400)),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
                   );
