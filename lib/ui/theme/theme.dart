@@ -5,7 +5,7 @@ var themeData = ThemeData(
     seedColor: const Color.fromARGB(255, 8, 84, 146),
   ),
   useMaterial3: true,
-  scaffoldBackgroundColor: Colors.white70,
+  scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 0.702),
   textTheme: const TextTheme(
       titleLarge: TextStyle(
         fontSize: 25,
