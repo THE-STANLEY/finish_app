@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Task {
   String label;
@@ -14,10 +15,7 @@ class TasksWidget extends StatefulWidget {
 }
 
 class _TasksWidgetState extends State<TasksWidget> {
-  final _tasks = [
-    Task(label: 'Выкинуть мусор'),
-    Task(label: 'Купить хлеб'),
-  ];
+  final _tasks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +87,17 @@ class _TasksWidgetState extends State<TasksWidget> {
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
                   );
                 },
-              )
+              ),
             ],
           ),
+          if (_tasks.isEmpty) ...[
+            Center(
+              child: SvgPicture.asset(
+                './assets/svg/successful.svg',
+                height: 70,
+              ),
+            )
+          ],
           Positioned(
             left: MediaQuery.of(context).size.width / 2 - 60,
             bottom: 20,
