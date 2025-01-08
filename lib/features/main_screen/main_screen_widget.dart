@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myday/features/main_screen/sections/settings/settings_widget.dart';
-import 'package:myday/features/main_screen/sections/tasks/tasks_widget.dart';
+
+import 'views/views.dart';
 
 class MainScreenWidget extends StatefulWidget {
   const MainScreenWidget({super.key});
