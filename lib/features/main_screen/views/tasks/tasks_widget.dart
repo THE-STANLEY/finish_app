@@ -30,12 +30,23 @@ class _TasksWidgetState extends State<TasksWidget> {
                 pinned: true,
                 centerTitle: true,
                 backgroundColor: Colors.white,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                title: Column(
                   children: [
-                    Text('Задачи',
-                        style: Theme.of(context).textTheme.titleMedium),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.edit))
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Задачи',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        FloatingActionButton.large(
+                          onPressed: () {},
+                          backgroundColor: Colors.transparent,
+                          elevation: 0.0,
+                          child: Text('Изменить',
+                              style: Theme.of(context).textTheme.labelMedium),
+                        )
+                      ],
+                    ),
                   ],
                 ),
                 snap: true,
@@ -63,39 +74,37 @@ class _TasksWidgetState extends State<TasksWidget> {
                   ),
                 ),
               ),
-              SliverList.builder(
+              SliverList.separated(
+                separatorBuilder: (context, index) => const Divider(
+                  height: 1,
+                ),
                 itemCount: _tasks.length,
                 itemBuilder: (context, index) {
                   final tasks = _tasks[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 3),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      color: Colors.white,
-                      child: ListTile(
-                        // leading: const Icon(Icons.folder_open_outlined),
-                        title: Text(tasks.label,
-                            style:
-                                const TextStyle(fontWeight: FontWeight.w400)),
-                        trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                      ),
-                    ),
+                  return ListTile(
+                    tileColor: Colors.white,
+                    leading: const Icon(Icons.folder_open_outlined),
+                    title: Text(tasks.label,
+                        style: const TextStyle(fontWeight: FontWeight.w400)),
+                    trailing: const Icon(Icons.arrow_forward_ios_outlined),
                   );
                 },
               )
             ],
           ),
           Positioned(
-            left: MediaQuery.of(context).size.width / 2 - 25,
+            left: MediaQuery.of(context).size.width / 2 - 60,
             bottom: 20,
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/main/new_task');
-              },
-              backgroundColor: Colors.purple,
-              shape: const CircleBorder(),
-              child: const Icon(Icons.add, color: Colors.white),
-            ),
+            child: FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/main/new_task');
+                },
+                backgroundColor: Colors.orange,
+                icon: const Icon(Icons.add, color: Colors.white),
+                label: const Text(
+                  'Создать',
+                  style: TextStyle(color: Colors.white),
+                )),
           )
         ],
       ),
