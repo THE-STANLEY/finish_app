@@ -15,6 +15,10 @@ var themeData = ThemeData(
       ),
       titleMedium: TextStyle(
           color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+      titleSmall: TextStyle(
+          color: Colors.black, fontSize: 19, fontWeight: FontWeight.bold),
+      labelLarge: TextStyle(
+          color: Colors.black, fontSize: 17, fontWeight: FontWeight.w500),
       labelMedium: TextStyle(
           color: Colors.orange, fontSize: 17, fontWeight: FontWeight.normal)),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
