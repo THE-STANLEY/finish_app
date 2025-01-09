@@ -36,10 +36,8 @@ class _TasksWidgetState extends State<TasksWidget> {
                       children: [
                         Text('Задачи',
                             style: Theme.of(context).textTheme.titleMedium),
-                        FloatingActionButton.large(
-                          onPressed: () {},
-                          backgroundColor: Colors.transparent,
-                          elevation: 0.0,
+                        InkWell(
+                          onTap: () {},
                           child: Text('Изменить',
                               style: Theme.of(context).textTheme.labelMedium),
                         )
@@ -102,6 +100,7 @@ class _TasksWidgetState extends State<TasksWidget> {
             left: MediaQuery.of(context).size.width / 2 - 60,
             bottom: 20,
             child: FloatingActionButton.extended(
+                heroTag: 'push_next_screen_button',
                 onPressed: () {
                   Navigator.of(context).pushNamed('/main/new_task');
                 },
