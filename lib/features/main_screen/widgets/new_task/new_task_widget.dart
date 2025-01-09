@@ -1,8 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NewTaskWidget extends StatelessWidget {
+class NewTaskWidget extends StatefulWidget {
   const NewTaskWidget({super.key});
+
+  @override
+  State<NewTaskWidget> createState() => _NewTaskWidgetState();
+}
+
+class _NewTaskWidgetState extends State<NewTaskWidget> {
+  final _taskNameController = TextEditingController();
+
+  void save() {
+    final taskName = _taskNameController.text;
+
+    if (taskName.isNotEmpty) {
+      Navigator.of(context).pop(taskName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +32,9 @@ class NewTaskWidget extends StatelessWidget {
         centerTitle: true,
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              save();
+            },
             child: Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Text('Сохранить',
@@ -44,6 +61,7 @@ class NewTaskWidget extends StatelessWidget {
                       color: const Color.fromARGB(33, 158, 158, 158),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
+                    controller: _taskNameController,
                     decoration: const InputDecoration(
                         labelText: 'Название',
                         border: InputBorder.none,
