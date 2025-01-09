@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../widgets/new_task/new_task.dart';
+
 class Task {
   String label;
 
@@ -16,6 +18,18 @@ class TasksWidget extends StatefulWidget {
 
 class _TasksWidgetState extends State<TasksWidget> {
   final _tasks = [];
+
+  void _navigateToNewTask() async {
+    final taskName = await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const NewTaskWidget()),
+    );
+
+    if (taskName != null && taskName.isNotEmpty) {
+      setState(() {
+        _tasks.add(taskName);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +93,6 @@ class _TasksWidgetState extends State<TasksWidget> {
                   final tasks = _tasks[index];
                   return ListTile(
                     tileColor: Colors.white,
-                    leading: const Icon(Icons.folder_open_outlined),
                     title: Text(tasks,
                         style: const TextStyle(fontWeight: FontWeight.w400)),
                     trailing: const Icon(Icons.arrow_forward_ios_outlined),
@@ -102,7 +115,7 @@ class _TasksWidgetState extends State<TasksWidget> {
             child: FloatingActionButton.extended(
                 heroTag: 'push_next_screen_button',
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/main/new_task');
+                  _navigateToNewTask();
                 },
                 backgroundColor: Colors.orange,
                 icon: const Icon(Icons.add, color: Colors.white),
