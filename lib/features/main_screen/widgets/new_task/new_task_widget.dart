@@ -58,6 +58,7 @@ class NewTaskWidget extends StatelessWidget {
                       color: const Color.fromARGB(33, 158, 158, 158),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
+                    enabled: false,
                     decoration: const InputDecoration(
                         labelText: 'Описание',
                         border: InputBorder.none,
@@ -74,6 +75,7 @@ class NewTaskWidget extends StatelessWidget {
                       color: const Color.fromARGB(33, 158, 158, 158),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
+                    enabled: false,
                     decoration: const InputDecoration(
                         labelText: '14 ноября',
                         border: InputBorder.none,
