@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewTaskWidget extends StatelessWidget {
@@ -7,66 +8,110 @@ class NewTaskWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.purple, size: 30),
-        title: Text('Новая задача',
-            style: Theme.of(context).textTheme.titleMedium),
+        iconTheme: const IconThemeData(
+          color: Colors.orange,
+          size: 30,
+        ),
+        title: Text('Создать задачу',
+            style: Theme.of(context).textTheme.titleSmall),
         centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Основное',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                const SizedBox(height: 20),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(64, 158, 158, 158),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Название',
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(64, 158, 158, 158),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Row(
-                    children: [],
-                  ),
-                )
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              width: double.infinity,
-              child: FloatingActionButton(
-                backgroundColor: Colors.purple,
-                onPressed: () {},
-                child: const Text('Сохранить',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18)),
-              ),
+        actions: [
+          InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Text('Сохранить',
+                  style: Theme.of(context).textTheme.labelMedium),
             ),
           )
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 1),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(19.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Основное', style: Theme.of(context).textTheme.titleSmall),
+                const SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(33, 158, 158, 158),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'Название',
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(33, 158, 158, 158),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'Описание',
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text('Дата', style: Theme.of(context).textTheme.titleSmall),
+                const SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(33, 158, 158, 158),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: '14 ноября',
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Задача на весь день',
+                        style: Theme.of(context).textTheme.labelLarge),
+                    const CupertinoSwitch(
+                      value: false,
+                      onChanged: null,
+                      activeColor: Colors.orange,
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Регулярная задача',
+                        style: Theme.of(context).textTheme.labelLarge),
+                    const CupertinoSwitch(
+                      value: false,
+                      onChanged: null,
+                      activeColor: Colors.orange,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
