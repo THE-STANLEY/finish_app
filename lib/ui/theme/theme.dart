@@ -24,6 +24,7 @@ var themeData = ThemeData(
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: Colors.orange,
     unselectedItemColor: Colors.grey,
+    backgroundColor: Color.fromARGB(207, 255, 255, 255),
   ),
   dividerColor: Colors.white24,
 );
