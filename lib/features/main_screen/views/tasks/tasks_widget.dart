@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../widgets/new_task/new_task.dart';
-
-class Task {
-  String label;
-
-  Task({required this.label});
-}
+import 'tasks_model.dart';
 
 class TasksWidget extends StatefulWidget {
   const TasksWidget({super.key});
@@ -17,22 +12,23 @@ class TasksWidget extends StatefulWidget {
 }
 
 class _TasksWidgetState extends State<TasksWidget> {
-  final _tasks = [];
-
-  void _navigateToNewTask() async {
-    final taskName = await Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => const NewTaskWidget()),
-    );
-
-    if (taskName != null && taskName.isNotEmpty) {
-      setState(() {
-        _tasks.add(taskName);
-      });
-    }
-  }
+  final _model = TasksModel();
 
   @override
   Widget build(BuildContext context) {
+    return TasksModelProvider(
+      model: _model,
+      child: _TasksWidgetBody(),
+    );
+  }
+}
+
+class _TasksWidgetBody extends StatelessWidget {
+  const _TasksWidgetBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final tasksCount = TasksModelProvider.of(context)?.model.tasks.length ?? 0;
     return Scaffold(
       body: Stack(
         children: [
@@ -88,20 +84,14 @@ class _TasksWidgetState extends State<TasksWidget> {
                 separatorBuilder: (context, index) => const Divider(
                   height: 1,
                 ),
-                itemCount: _tasks.length,
+                itemCount: tasksCount,
                 itemBuilder: (context, index) {
-                  final tasks = _tasks[index];
-                  return ListTile(
-                    tileColor: Colors.white,
-                    title: Text(tasks,
-                        style: const TextStyle(fontWeight: FontWeight.w400)),
-                    trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                  );
+                  return _TasksRowWidget(indexInList: index);
                 },
               ),
             ],
           ),
-          if (_tasks.isEmpty) ...[
+          if (tasksCount == 0) ...[
             Center(
               child: SvgPicture.asset(
                 './assets/svg/successful.svg',
@@ -114,9 +104,8 @@ class _TasksWidgetState extends State<TasksWidget> {
             bottom: 20,
             child: FloatingActionButton.extended(
                 heroTag: 'push_next_screen_button',
-                onPressed: () {
-                  _navigateToNewTask();
-                },
+                onPressed: () =>
+                    TasksModelProvider.of(context)?.model.showForm(context),
                 backgroundColor: Colors.orange,
                 icon: const Icon(Icons.add, color: Colors.white),
                 label: const Text(
@@ -125,6 +114,39 @@ class _TasksWidgetState extends State<TasksWidget> {
                 )),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _TasksRowWidget extends StatelessWidget {
+  final int indexInList;
+  const _TasksRowWidget({super.key, required this.indexInList});
+
+  @override
+  Widget build(BuildContext context) {
+    final task = TasksModelProvider.of(context)!.model.tasks[indexInList];
+
+    return Slidable(
+      endActionPane: ActionPane(
+        motion: ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (BuildContext context) {
+              TasksModelProvider.of(context)?.model.deleteTask(indexInList);
+            },
+            backgroundColor: Color(0xFFFE4A49),
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Удалить',
+          ),
+        ],
+      ),
+      child: ListTile(
+        tileColor: Colors.white,
+        title: Text(task.name,
+            style: const TextStyle(fontWeight: FontWeight.w400)),
+        trailing: const Icon(Icons.arrow_forward_ios_outlined),
       ),
     );
   }
