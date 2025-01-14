@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'new_task_model.dart';
+
 class NewTaskWidget extends StatefulWidget {
   const NewTaskWidget({super.key});
 
@@ -9,15 +11,19 @@ class NewTaskWidget extends StatefulWidget {
 }
 
 class _NewTaskWidgetState extends State<NewTaskWidget> {
-  final _taskNameController = TextEditingController();
+  final _model = NewTaskModel();
 
-  void save() {
-    final taskName = _taskNameController.text;
-
-    if (taskName.isNotEmpty) {
-      Navigator.of(context).pop(taskName);
-    }
+  @override
+  Widget build(BuildContext context) {
+    return NewTaskModelProvider(
+      model: _model,
+      child: _NewTaskWidgetBody(),
+    );
   }
+}
+
+class _NewTaskWidgetBody extends StatelessWidget {
+  const _NewTaskWidgetBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +39,7 @@ class _NewTaskWidgetState extends State<NewTaskWidget> {
         actions: [
           InkWell(
             onTap: () {
-              save();
+              NewTaskModelProvider.of(context)?.model.saveTask(context);
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 10),
@@ -61,7 +67,9 @@ class _NewTaskWidgetState extends State<NewTaskWidget> {
                       color: const Color.fromARGB(33, 158, 158, 158),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
-                    controller: _taskNameController,
+                    onChanged: (value) => NewTaskModelProvider.of(context)
+                        ?.model
+                        .taskName = value,
                     decoration: const InputDecoration(
                         labelText: 'Название',
                         border: InputBorder.none,
