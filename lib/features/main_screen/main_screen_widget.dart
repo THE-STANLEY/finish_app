@@ -13,7 +13,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
   int _bottomSelected = 0;
 
   static final _widgetOptions = <Widget>[
-    const TasksWidget(),
+    const GroupsWidget(),
     const SettingsWidget()
   ];
 
