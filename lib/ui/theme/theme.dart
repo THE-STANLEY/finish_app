@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 var themeData = ThemeData(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromARGB(255, 8, 84, 146),
+    seedColor: Colors.orange,
   ),
   useMaterial3: true,
   scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 0.702),

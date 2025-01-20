@@ -53,7 +53,7 @@ class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Задачи',
+                        Text('Папки',
                             style: Theme.of(context).textTheme.titleMedium),
                         InkWell(
                           onTap: () {
@@ -162,9 +162,13 @@ class _GroupsRowWidget extends StatelessWidget {
       ),
       child: ListTile(
         tileColor: Colors.white,
+        leading: Icon(Icons.folder_open_outlined),
         title: Text(group.name,
             style: const TextStyle(fontWeight: FontWeight.w400)),
         trailing: const Icon(Icons.arrow_forward_ios_outlined),
+        onTap: () => GroupsModelProvider.of(context)
+            ?.model
+            .showTasks(context, indexInList),
       ),
     );
   }

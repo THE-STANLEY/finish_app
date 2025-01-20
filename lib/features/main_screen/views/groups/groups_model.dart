@@ -11,6 +11,16 @@ class GroupsModel extends ChangeNotifier {
     Navigator.of(context).pushNamed('/main/new_group');
   }
 
+  void showTasks(BuildContext context, int groupIndex) async {
+    if (!Hive.isAdapterRegistered(1)) {
+      Hive.registerAdapter(GroupAdapter());
+    }
+    final box = await Hive.openBox<Group>('groups_box');
+    final groupKey = box.keyAt(groupIndex) as int;
+
+    Navigator.of(context).pushNamed('/main/tasks', arguments: groupKey);
+  }
+
   GroupsModel() {
     _setup();
   }

@@ -11,12 +11,22 @@ class NewTaskWidget extends StatefulWidget {
 }
 
 class _NewTaskWidgetState extends State<NewTaskWidget> {
-  final _model = NewTaskModel();
+  NewTaskModel? _model;
+
+  @override
+  void didChangeDependencies() {
+    if (_model == null) {
+      final groupKey = ModalRoute.of(context)!.settings.arguments
+          as int; // Получаем groupKey
+      super.didChangeDependencies();
+      _model = NewTaskModel(groupKey: groupKey);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return NewTaskModelProvider(
-      model: _model,
+      model: _model!,
       child: _NewTaskWidgetBody(),
     );
   }
@@ -69,7 +79,7 @@ class _NewTaskWidgetBody extends StatelessWidget {
                   child: TextFormField(
                     onChanged: (value) => NewTaskModelProvider.of(context)
                         ?.model
-                        .taskName = value,
+                        .taskText = value,
                     decoration: const InputDecoration(
                         labelText: 'Название',
                         border: InputBorder.none,
