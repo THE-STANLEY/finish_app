@@ -28,10 +28,10 @@ class TasksModel extends ChangeNotifier {
   }
 
   void _setupListen() async {
-    if (!Hive.isAdapterRegistered(1)) {
+    if (!Hive.isAdapterRegistered(2)) {
       Hive.registerAdapter(TaskAdapter());
     }
-    final box = await Hive.openBox<Task>('tasks_group');
+    final box = await Hive.openBox<Task>('tasks_box');
     _readTasks();
     box.watch().listen((event) {
       _readTasks();
@@ -41,6 +41,14 @@ class TasksModel extends ChangeNotifier {
   void deleteTask(int groupIndex) async {
     await _group?.tasks?.deleteFromHive(groupIndex);
     await _group?.save();
+  }
+
+  void doneToggle(int groupIndex) async {
+    final task = _group?.tasks?[groupIndex];
+    final currentState = _group?.tasks?[groupIndex].isDone ?? false;
+    task?.isDone = !currentState;
+    await task?.save();
+    notifyListeners();
   }
 
   void _setup() {

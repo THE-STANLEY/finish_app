@@ -47,6 +47,7 @@ class _TasksWidgetBody extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(228, 255, 255, 255),
         appBar: AppBar(
+          backgroundColor: Colors.white,
           iconTheme: const IconThemeData(
             color: Colors.orange,
             size: 30,
@@ -91,6 +92,12 @@ class _TaskWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = TasksModelProvider.of(context)!.model;
     final task = model.tasks[indexInList];
+
+    final style = task.isDone
+        ? const TextStyle(
+            fontWeight: FontWeight.w400, decoration: TextDecoration.lineThrough)
+        : const TextStyle(fontWeight: FontWeight.w400);
+    final icon = task.isDone ? Icons.done : null;
     return Slidable(
       endActionPane: ActionPane(
         motion: ScrollMotion(),
@@ -108,9 +115,11 @@ class _TaskWrapper extends StatelessWidget {
       ),
       child: ListTile(
         tileColor: Colors.white,
-        title: Text(task.text,
-            style: const TextStyle(fontWeight: FontWeight.w400)),
-        onTap: () {},
+        title: Text(task.text, style: style),
+        trailing: Icon(icon),
+        onTap: () {
+          TasksModelProvider.of(context)?.model.doneToggle(indexInList);
+        },
       ),
     );
   }

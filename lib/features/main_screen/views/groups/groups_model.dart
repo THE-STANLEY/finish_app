@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../domain/entity/group.dart';
+import '../../../../domain/entity/task.dart';
 
 class GroupsModel extends ChangeNotifier {
   var _groups = <Group>[];
@@ -30,6 +31,7 @@ class GroupsModel extends ChangeNotifier {
       Hive.registerAdapter(GroupAdapter());
     }
     final box = await Hive.openBox<Group>('groups_box');
+    await box.getAt(groupIndex)?.tasks?.deleteAllFromHive();
     await box.deleteAt(groupIndex);
   }
 
@@ -38,13 +40,16 @@ class GroupsModel extends ChangeNotifier {
       Hive.registerAdapter(GroupAdapter());
     }
     final box = await Hive.openBox<Group>('groups_box');
+    if (!Hive.isAdapterRegistered(2)) {
+      Hive.registerAdapter(TaskAdapter());
+    }
+    await Hive.openBox<Task>('tasks_box');
     _groups = box.values.toList();
     notifyListeners();
     box.listenable().addListener(() {
       _groups = box.values.toList();
       notifyListeners();
     });
-    print('SUCCESSFUL1');
   }
 }
 

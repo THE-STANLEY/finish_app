@@ -39,6 +39,7 @@ class _NewTaskWidgetBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
           color: Colors.orange,
           size: 30,
@@ -129,7 +130,7 @@ class _NewTaskWidgetBody extends StatelessWidget {
                     const CupertinoSwitch(
                       value: false,
                       onChanged: null,
-                      activeColor: Colors.orange,
+                      activeTrackColor: Colors.orange,
                     )
                   ],
                 ),
@@ -142,7 +143,7 @@ class _NewTaskWidgetBody extends StatelessWidget {
                     const CupertinoSwitch(
                       value: false,
                       onChanged: null,
-                      activeColor: Colors.orange,
+                      activeTrackColor: Colors.orange,
                     )
                   ],
                 ),
