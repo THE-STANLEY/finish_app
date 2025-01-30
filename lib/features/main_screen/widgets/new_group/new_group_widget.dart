@@ -50,9 +50,10 @@ class _NewGroupWidgetBody extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 1),
-        child: SizedBox(
+        child: Container(
           width: double.infinity,
           height: double.infinity,
+          decoration: BoxDecoration(color: Colors.transparent),
           child: Padding(
             padding: const EdgeInsets.all(19.0),
             child: Column(

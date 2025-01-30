@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:myday/ui/ui.dart';
 
 import 'tasks_model.dart';
 
@@ -103,28 +104,31 @@ class _TaskWrapper extends StatelessWidget {
             fontWeight: FontWeight.w400, decoration: TextDecoration.lineThrough)
         : const TextStyle(fontWeight: FontWeight.w400);
     final icon = task.isDone ? Icons.done : null;
-    return Slidable(
-      endActionPane: ActionPane(
-        motion: ScrollMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (BuildContext context) {
-              TasksModelProvider.of(context)?.model.deleteTask(indexInList);
-            },
-            backgroundColor: Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Удалить',
-          ),
-        ],
-      ),
-      child: ListTile(
-        title: Text(task.text, style: styleName),
-        subtitle: Text(task.description, style: styleDesc),
-        trailing: Icon(icon),
-        onTap: () {
-          TasksModelProvider.of(context)?.model.doneToggle(indexInList);
-        },
+    return Container(
+      decoration: listStyle,
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (BuildContext context) {
+                TasksModelProvider.of(context)?.model.deleteTask(indexInList);
+              },
+              backgroundColor: Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Удалить',
+            ),
+          ],
+        ),
+        child: ListTile(
+          title: Text(task.text, style: styleName),
+          subtitle: Text(task.description, style: styleDesc),
+          trailing: Icon(icon),
+          onTap: () {
+            TasksModelProvider.of(context)?.model.doneToggle(indexInList);
+          },
+        ),
       ),
     );
   }

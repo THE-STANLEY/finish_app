@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final darkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.black,
+    seedColor: Colors.white,
     brightness: Brightness.dark,
   ),
   appBarTheme: AppBarTheme(
@@ -22,7 +22,7 @@ final darkTheme = ThemeData(
 final lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.white,
+    seedColor: Colors.black,
     brightness: Brightness.light,
   ),
   appBarTheme: AppBarTheme(

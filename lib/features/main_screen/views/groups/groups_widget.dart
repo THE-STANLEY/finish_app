@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myday/ui/ui.dart';
 
 import 'groups_model.dart';
 
@@ -124,29 +125,32 @@ class _GroupsRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final group = GroupsModelProvider.of(context)!.model.groups[indexInList];
 
-    return Slidable(
-      endActionPane: ActionPane(
-        motion: ScrollMotion(),
-        children: [
-          SlidableAction(
-            onPressed: (BuildContext context) {
-              GroupsModelProvider.of(context)?.model.deleteGroup(indexInList);
-            },
-            backgroundColor: Color(0xFFFE4A49),
-            foregroundColor: Colors.white,
-            icon: Icons.delete,
-            label: 'Удалить',
-          ),
-        ],
-      ),
-      child: ListTile(
-        leading: Icon(Icons.folder_open_outlined),
-        title: Text(group.name,
-            style: const TextStyle(fontWeight: FontWeight.w400)),
-        trailing: const Icon(Icons.arrow_forward_ios_outlined),
-        onTap: () => GroupsModelProvider.of(context)
-            ?.model
-            .showTasks(context, indexInList),
+    return Container(
+      decoration: listStyle,
+      child: Slidable(
+        endActionPane: ActionPane(
+          motion: ScrollMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (BuildContext context) {
+                GroupsModelProvider.of(context)?.model.deleteGroup(indexInList);
+              },
+              backgroundColor: Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Удалить',
+            ),
+          ],
+        ),
+        child: ListTile(
+          leading: Icon(Icons.folder_open_outlined),
+          title: Text(group.name,
+              style: const TextStyle(fontWeight: FontWeight.w400)),
+          trailing: const Icon(Icons.arrow_forward_ios_outlined),
+          onTap: () => GroupsModelProvider.of(context)
+              ?.model
+              .showTasks(context, indexInList),
+        ),
       ),
     );
   }
