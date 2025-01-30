@@ -31,9 +31,6 @@ class _GroupsWidgetBody extends StatefulWidget {
 }
 
 class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
-  bool _isEditing = false;
-  bool _showCreateButton = false;
-
   @override
   Widget build(BuildContext context) {
     final groupsCount =
@@ -45,56 +42,38 @@ class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
             slivers: [
               SliverAppBar(
                 pinned: true,
-                centerTitle: true,
-                backgroundColor: Colors.white,
                 title: Column(
                   children: [
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Папки',
-                            style: Theme.of(context).textTheme.titleMedium),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _isEditing = !_isEditing;
-                              _showCreateButton = !_showCreateButton;
-                            });
-                          },
-                          child: Text(
-                            _isEditing ? 'Применить' : 'Изменить',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        )
-                      ],
-                    ),
+                    Text('Папки',
+                        style: Theme.of(context).textTheme.titleMedium),
+                    const SizedBox(height: 20),
                   ],
                 ),
                 snap: true,
                 floating: true,
                 surfaceTintColor: Colors.transparent,
-                bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(80),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(33, 158, 158, 158),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            labelText: 'Поиск в задачах',
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 16)),
-                      ),
-                    ),
-                  ),
-                ),
+                // bottom: PreferredSize(
+                //   preferredSize: const Size.fromHeight(80),
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(10.0),
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //           color: const Color.fromARGB(33, 158, 158, 158),
+                //           borderRadius: BorderRadius.circular(10)),
+                //       child: TextFormField(
+                //         decoration: const InputDecoration(
+                //             prefixIcon: Icon(Icons.search),
+                //             labelText: 'Поиск в задачах',
+                //             border: InputBorder.none,
+                //             enabledBorder: InputBorder.none,
+                //             focusedBorder: InputBorder.none,
+                //             contentPadding:
+                //                 EdgeInsets.symmetric(horizontal: 16)),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ),
               SliverList.separated(
                 separatorBuilder: (context, index) => const Divider(
@@ -115,22 +94,22 @@ class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
               ),
             )
           ],
-          if (_showCreateButton)
-            Positioned(
-              left: MediaQuery.of(context).size.width / 2 - 90,
-              bottom: 20,
-              child: FloatingActionButton.extended(
-                heroTag: 'push_next_screen_button',
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(10)),
+              child: IconButton(
                 onPressed: () =>
                     GroupsModelProvider.of(context)?.model.showForm(context),
-                backgroundColor: Colors.orange,
                 icon: const Icon(Icons.add, color: Colors.white),
-                label: const Text(
-                  'Создать папку',
-                  style: TextStyle(color: Colors.white),
-                ),
               ),
-            )
+            ),
+          )
         ],
       ),
     );
@@ -161,7 +140,6 @@ class _GroupsRowWidget extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        tileColor: Colors.white,
         leading: Icon(Icons.folder_open_outlined),
         title: Text(group.name,
             style: const TextStyle(fontWeight: FontWeight.w400)),

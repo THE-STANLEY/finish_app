@@ -32,7 +32,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _bottomSelected,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: 'Задачи'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.done_rounded), label: 'Задачи'),
           BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Параметры'),
         ],

@@ -11,6 +11,7 @@ class NewTaskModel {
 
   int groupKey;
   var taskText = '';
+  var taskDescription = '';
 
   void saveTask(BuildContext context) async {
     if (taskText.isEmpty) return;
@@ -24,7 +25,8 @@ class NewTaskModel {
     }
 
     final taskBox = await Hive.openBox<Task>('tasks_box');
-    final task = Task(text: taskText, isDone: false);
+    final task =
+        Task(text: taskText, isDone: false, description: taskDescription);
     await taskBox.add(task);
 
     final groupBox = await Hive.openBox<Group>('groups_box');

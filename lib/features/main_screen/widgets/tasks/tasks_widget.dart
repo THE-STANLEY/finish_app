@@ -45,42 +45,42 @@ class _TasksWidgetBody extends StatelessWidget {
     final tasksCount = TasksModelProvider.of(context)?.model.tasks.length ?? 0;
 
     return Scaffold(
-        backgroundColor: const Color.fromARGB(228, 255, 255, 255),
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: const IconThemeData(
-            color: Colors.orange,
-            size: 30,
-          ),
-          title: Text(title, style: Theme.of(context).textTheme.titleSmall),
-          centerTitle: true,
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.orange,
+          size: 30,
         ),
-        body: Stack(
-          children: [
-            ListView.separated(
-                separatorBuilder: (context, index) => Divider(height: 1),
-                itemCount: tasksCount,
-                itemBuilder: (context, index) {
-                  return _TaskWrapper(indexInList: index);
-                }),
-            Positioned(
-              right: 20,
-              bottom: 20,
-              child: Container(
-                width: 55,
-                height: 55,
-                decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.circular(10)),
-                child: IconButton(
-                  onPressed: () =>
-                      TasksModelProvider.of(context)?.model.showForm(context),
-                  icon: const Icon(Icons.add, color: Colors.white),
-                ),
+        title: Text(title, style: Theme.of(context).textTheme.titleSmall),
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: [
+          ListView.separated(
+            separatorBuilder: (context, index) => Divider(height: 1),
+            itemCount: tasksCount,
+            itemBuilder: (context, index) {
+              return _TaskWrapper(indexInList: index);
+            },
+          ),
+          Positioned(
+            right: 20,
+            bottom: 40,
+            child: Container(
+              width: 55,
+              height: 55,
+              decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(10)),
+              child: IconButton(
+                onPressed: () =>
+                    TasksModelProvider.of(context)?.model.showForm(context),
+                icon: const Icon(Icons.add, color: Colors.white),
               ),
-            )
-          ],
-        ));
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -93,7 +93,12 @@ class _TaskWrapper extends StatelessWidget {
     final model = TasksModelProvider.of(context)!.model;
     final task = model.tasks[indexInList];
 
-    final style = task.isDone
+    final styleName = task.isDone
+        ? const TextStyle(
+            fontWeight: FontWeight.w400, decoration: TextDecoration.lineThrough)
+        : const TextStyle(fontWeight: FontWeight.w600);
+
+    final styleDesc = task.isDone
         ? const TextStyle(
             fontWeight: FontWeight.w400, decoration: TextDecoration.lineThrough)
         : const TextStyle(fontWeight: FontWeight.w400);
@@ -114,8 +119,8 @@ class _TaskWrapper extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        tileColor: Colors.white,
-        title: Text(task.text, style: style),
+        title: Text(task.text, style: styleName),
+        subtitle: Text(task.description, style: styleDesc),
         trailing: Icon(icon),
         onTap: () {
           TasksModelProvider.of(context)?.model.doneToggle(indexInList);

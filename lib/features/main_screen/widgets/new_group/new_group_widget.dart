@@ -50,10 +50,9 @@ class _NewGroupWidgetBody extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 1),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(19.0),
             child: Column(
@@ -71,21 +70,6 @@ class _NewGroupWidgetBody extends StatelessWidget {
                         .groupName = value,
                     decoration: const InputDecoration(
                         labelText: 'Название',
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(33, 158, 158, 158),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextFormField(
-                    enabled: false,
-                    decoration: const InputDecoration(
-                        labelText: 'Описание',
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
