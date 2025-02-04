@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myday/ui/ui.dart';
 
 import 'groups_model.dart';
 
@@ -51,9 +50,6 @@ class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
                     const SizedBox(height: 20),
                   ],
                 ),
-                snap: true,
-                floating: true,
-                surfaceTintColor: Colors.transparent,
                 // bottom: PreferredSize(
                 //   preferredSize: const Size.fromHeight(80),
                 //   child: Padding(
@@ -124,6 +120,12 @@ class _GroupsRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final group = GroupsModelProvider.of(context)!.model.groups[indexInList];
+
+    final listStyle = BoxDecoration(
+      color: Theme.of(context).brightness == Brightness.dark
+          ? const Color.fromARGB(19, 158, 158, 158)
+          : Colors.white,
+    );
 
     return Container(
       decoration: listStyle,

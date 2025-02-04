@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:myday/ui/ui.dart';
 
 import 'tasks_model.dart';
 
@@ -54,32 +53,39 @@ class _TasksWidgetBody extends StatelessWidget {
         title: Text(title, style: Theme.of(context).textTheme.titleSmall),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          ListView.separated(
-            separatorBuilder: (context, index) => Divider(height: 1),
-            itemCount: tasksCount,
-            itemBuilder: (context, index) {
-              return _TaskWrapper(indexInList: index);
-            },
-          ),
-          Positioned(
-            right: 20,
-            bottom: 40,
-            child: Container(
-              width: 55,
-              height: 55,
-              decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(10)),
-              child: IconButton(
-                onPressed: () =>
-                    TasksModelProvider.of(context)?.model.showForm(context),
-                icon: const Icon(Icons.add, color: Colors.white),
-              ),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).brightness == Brightness.dark
+              ? const Color.fromARGB(19, 158, 158, 158)
+              : const Color.fromRGBO(255, 255, 255, 0.702),
+        ),
+        child: Stack(
+          children: [
+            ListView.separated(
+              separatorBuilder: (context, index) => Divider(height: 1),
+              itemCount: tasksCount,
+              itemBuilder: (context, index) {
+                return _TaskWrapper(indexInList: index);
+              },
             ),
-          )
-        ],
+            Positioned(
+              right: 20,
+              bottom: 40,
+              child: Container(
+                width: 55,
+                height: 55,
+                decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(10)),
+                child: IconButton(
+                  onPressed: () =>
+                      TasksModelProvider.of(context)?.model.showForm(context),
+                  icon: const Icon(Icons.add, color: Colors.white),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -91,6 +97,12 @@ class _TaskWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final listStyle = BoxDecoration(
+      color: Theme.of(context).brightness == Brightness.dark
+          ? const Color.fromARGB(19, 158, 158, 158)
+          : Colors.white,
+    );
+
     final model = TasksModelProvider.of(context)!.model;
     final task = model.tasks[indexInList];
 

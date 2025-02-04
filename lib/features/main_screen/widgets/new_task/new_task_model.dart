@@ -34,6 +34,7 @@ class NewTaskModel {
     group?.addTask(taskBox, task);
     print(group);
     Navigator.of(context).pop();
+    await task.save();
   }
 }
 

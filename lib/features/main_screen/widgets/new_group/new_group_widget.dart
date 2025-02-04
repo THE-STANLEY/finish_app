@@ -53,7 +53,11 @@ class _NewGroupWidgetBody extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(color: Colors.transparent),
+          decoration: BoxDecoration(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color.fromARGB(19, 158, 158, 158)
+                : Colors.white,
+          ),
           child: Padding(
             padding: const EdgeInsets.all(19.0),
             child: Column(

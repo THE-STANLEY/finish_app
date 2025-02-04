@@ -7,13 +7,13 @@ final darkTheme = ThemeData(
     brightness: Brightness.dark,
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: Color.fromARGB(6, 158, 158, 158),
+    backgroundColor: const Color.fromARGB(19, 158, 158, 158),
   ),
   scaffoldBackgroundColor: const Color.fromARGB(19, 158, 158, 158),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: Colors.orange,
     unselectedItemColor: Color.fromARGB(255, 219, 217, 217),
-    backgroundColor: Color.fromARGB(6, 158, 158, 158),
+    backgroundColor: Color.fromARGB(19, 158, 158, 158),
   ),
   textTheme: _textTheme,
   dividerColor: Colors.white24,
@@ -26,13 +26,13 @@ final lightTheme = ThemeData(
     brightness: Brightness.light,
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: Color.fromARGB(33, 158, 158, 158),
+    backgroundColor: Colors.white,
   ),
-  // scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 0.702),
+  scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 0.702),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     selectedItemColor: Colors.orange,
     unselectedItemColor: Colors.grey,
-    backgroundColor: Color.fromARGB(209, 255, 255, 255),
+    backgroundColor: Colors.white,
   ),
   textTheme: _textTheme,
   dividerColor: Colors.white24,

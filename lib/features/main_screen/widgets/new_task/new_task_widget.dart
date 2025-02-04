@@ -58,54 +58,53 @@ class _NewTaskWidgetBody extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 1),
-        child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.all(19.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Основное', style: Theme.of(context).textTheme.titleSmall),
-                const SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(33, 158, 158, 158),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextField(
-                    maxLines: 1,
-                    onChanged: (value) => NewTaskModelProvider.of(context)
-                        ?.model
-                        .taskText = value,
-                    decoration: const InputDecoration(
-                        labelText: 'Название',
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
-                  ),
+      body: Container(
+        color: Theme.of(context).brightness == Brightness.dark
+            ? const Color.fromARGB(19, 158, 158, 158)
+            : Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(19.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Основное', style: Theme.of(context).textTheme.titleSmall),
+              const SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(33, 158, 158, 158),
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextField(
+                  maxLines: 1,
+                  onChanged: (value) =>
+                      NewTaskModelProvider.of(context)?.model.taskText = value,
+                  decoration: const InputDecoration(
+                      labelText: 'Название',
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16)),
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(33, 158, 158, 158),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextField(
-                    minLines: 1,
-                    maxLines: 10,
-                    onChanged: (value) => NewTaskModelProvider.of(context),
-                    decoration: const InputDecoration(
-                        labelText: 'Описание',
-                        border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
-                  ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(33, 158, 158, 158),
+                    borderRadius: BorderRadius.circular(10)),
+                child: TextField(
+                  minLines: 1,
+                  maxLines: 10,
+                  onChanged: (value) => NewTaskModelProvider.of(context)
+                      ?.model
+                      .taskDescription = value,
+                  decoration: const InputDecoration(
+                      labelText: 'Описание',
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16)),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
