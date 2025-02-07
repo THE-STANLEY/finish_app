@@ -22,7 +22,7 @@ class _NewGroupWidgetState extends State<NewGroupWidget> {
 }
 
 class _NewGroupWidgetBody extends StatelessWidget {
-  const _NewGroupWidgetBody({super.key});
+  const _NewGroupWidgetBody();
 
   @override
   Widget build(BuildContext context) {

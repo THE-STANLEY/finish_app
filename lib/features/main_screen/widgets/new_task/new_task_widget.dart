@@ -32,7 +32,7 @@ class _NewTaskWidgetState extends State<NewTaskWidget> {
 }
 
 class _NewTaskWidgetBody extends StatelessWidget {
-  const _NewTaskWidgetBody({super.key});
+  const _NewTaskWidgetBody();
 
   @override
   Widget build(BuildContext context) {

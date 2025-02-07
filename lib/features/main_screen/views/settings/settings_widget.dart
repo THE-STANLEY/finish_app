@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myday/bloc/theme/theme_cubit.dart';
 import 'package:myday/version.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({super.key});
@@ -15,7 +16,7 @@ class SettingsWidget extends StatelessWidget {
 }
 
 class _SettingsWidgetBody extends StatefulWidget {
-  const _SettingsWidgetBody({super.key});
+  const _SettingsWidgetBody();
 
   @override
   State<_SettingsWidgetBody> createState() => _SettingsWidgetBodyState();
@@ -41,9 +42,7 @@ class _SettingsWidgetBodyState extends State<_SettingsWidgetBody> {
 }
 
 class _Switchs extends StatefulWidget {
-  const _Switchs({
-    super.key,
-  });
+  const _Switchs();
 
   @override
   State<_Switchs> createState() => _SwitchsState();
@@ -63,7 +62,7 @@ class _SwitchsState extends State<_Switchs> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _switchValue = prefs.getBool('switchState') ??
-          false; // Если нет сохраненного значения, по умолчанию false
+          true; // Если нет сохраненного значения, по умолчанию false
     });
   }
 
@@ -150,7 +149,7 @@ class _SwitchsState extends State<_Switchs> {
 }
 
 class _Links extends StatelessWidget {
-  const _Links({super.key});
+  const _Links();
 
   @override
   Widget build(BuildContext context) {
@@ -182,6 +181,15 @@ class _Links extends StatelessWidget {
             ),
             title: Text('Поддержать разработчиков'),
             trailing: Icon(Icons.arrow_forward_ios),
+            onTap: () async {
+              final Uri url =
+                  Uri.parse('https://www.donationalerts.com/r/the_stanley');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url, mode: LaunchMode.externalApplication);
+              } else {
+                throw 'Не удалось открыть $url';
+              }
+            },
           ),
           Divider(height: 0.1),
           ListTile(
@@ -195,20 +203,28 @@ class _Links extends StatelessWidget {
             ),
             title: Text('Сообщить о баге'),
             trailing: Icon(Icons.arrow_forward_ios),
+            onTap: () async {
+              final Uri url = Uri.parse('https://t.me/Zavershay_support_bot');
+              if (await canLaunchUrl(url)) {
+                await launchUrl(url, mode: LaunchMode.externalApplication);
+              } else {
+                throw 'Не удалось открыть $url';
+              }
+            },
           ),
-          Divider(height: 0.1),
-          ListTile(
-            leading: SvgPicture.asset(
-              './assets/svg/star.svg',
-              width: 30,
-              height: 30,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? const Color.fromARGB(153, 255, 255, 255)
-                  : Colors.black,
-            ),
-            title: Text('Оценить приложение'),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),
+          // Divider(height: 0.1),
+          // ListTile(
+          //   leading: SvgPicture.asset(
+          //     './assets/svg/star.svg',
+          //     width: 30,
+          //     height: 30,
+          //     color: Theme.of(context).brightness == Brightness.dark
+          //         ? const Color.fromARGB(153, 255, 255, 255)
+          //         : Colors.black,
+          //   ),
+          //   title: Text('Оценить приложение'),
+          //   trailing: Icon(Icons.arrow_forward_ios),
+          // ),
         ],
       ),
     );

@@ -1,5 +1,5 @@
 name: myday
-description: "A new Flutter project."
+description: "You're helper"
 
 version: 1.0.0+1
 
@@ -20,6 +20,7 @@ dependencies:
   flutter_bloc: ^9.0.0
   shared_preferences: ^2.5.1
   firebase_core: ^3.10.1
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

@@ -36,7 +36,7 @@ class _TasksWidgetState extends State<TasksWidget> {
 }
 
 class _TasksWidgetBody extends StatelessWidget {
-  const _TasksWidgetBody({super.key});
+  const _TasksWidgetBody();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class _TasksWidgetBody extends StatelessWidget {
 
 class _TaskWrapper extends StatelessWidget {
   final int indexInList;
-  const _TaskWrapper({super.key, required this.indexInList});
+  const _TaskWrapper({required this.indexInList});
 
   @override
   Widget build(BuildContext context) {

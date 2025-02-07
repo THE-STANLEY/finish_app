@@ -24,7 +24,7 @@ class _GroupsWidgetState extends State<GroupsWidget> {
 }
 
 class _GroupsWidgetBody extends StatefulWidget {
-  const _GroupsWidgetBody({super.key});
+  const _GroupsWidgetBody();
 
   @override
   State<_GroupsWidgetBody> createState() => _GroupsWidgetBodyState();
@@ -115,7 +115,7 @@ class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
 
 class _GroupsRowWidget extends StatelessWidget {
   final int indexInList;
-  const _GroupsRowWidget({super.key, required this.indexInList});
+  const _GroupsRowWidget({required this.indexInList});
 
   @override
   Widget build(BuildContext context) {
