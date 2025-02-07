@@ -134,6 +134,7 @@ class _TaskWrapper extends StatelessWidget {
           ],
         ),
         child: ListTile(
+          leading: Icon(Icons.task),
           title: Text(task.text, style: styleName),
           subtitle: Text(task.description, style: styleDesc),
           trailing: Icon(icon),

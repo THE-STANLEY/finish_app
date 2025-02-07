@@ -63,8 +63,6 @@ class _NewGroupWidgetBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Основное', style: Theme.of(context).textTheme.titleSmall),
-                const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(33, 158, 158, 158),

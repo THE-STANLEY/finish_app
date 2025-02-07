@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374822235749",
+    "project_id": "finish-ec38e",
+    "storage_bucket": "finish-ec38e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374822235749:android:edb2e268a6fa0f5fe5e08c",
+        "android_client_info": {
+          "package_name": "com.example.myday"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkErPIBt6i5OlAQ0mrA2xPKnVjgCbVjbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

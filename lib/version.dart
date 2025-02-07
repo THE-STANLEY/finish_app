@@ -9,7 +9,7 @@ class VersionApp extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Center(
         child: Text(
-          'Версия: 0.0.1',
+          'Версия: 1.0.0',
           style: TextStyle(fontSize: 18),
         ),
       ),

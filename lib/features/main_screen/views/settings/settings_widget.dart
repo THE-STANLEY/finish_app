@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myday/bloc/theme/theme_cubit.dart';
 import 'package:myday/version.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({super.key});
@@ -39,10 +40,38 @@ class _SettingsWidgetBodyState extends State<_SettingsWidgetBody> {
   }
 }
 
-class _Switchs extends StatelessWidget {
+class _Switchs extends StatefulWidget {
   const _Switchs({
     super.key,
   });
+
+  @override
+  State<_Switchs> createState() => _SwitchsState();
+}
+
+class _SwitchsState extends State<_Switchs> {
+  bool _switchValue = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSwitchValue();
+  }
+
+  // Загружаем сохраненное значение при старте
+  _loadSwitchValue() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _switchValue = prefs.getBool('switchState') ??
+          false; // Если нет сохраненного значения, по умолчанию false
+    });
+  }
+
+  // Сохраняем значение переключателя
+  _saveSwitchValue(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('switchState', value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,21 +114,6 @@ class _Switchs extends StatelessWidget {
             Divider(height: 0.1),
             ListTile(
               title: Text(
-                'Уведомления',
-                style: TextStyle(fontSize: 17),
-              ),
-              trailing: Switch(
-                value: false,
-                onChanged: (v) {},
-                inactiveTrackColor: Colors.transparent,
-                inactiveThumbColor: Colors.grey,
-                activeColor: Colors.white,
-                activeTrackColor: Colors.green,
-              ),
-            ),
-            Divider(height: 0.1),
-            ListTile(
-              title: Text(
                 'Разрешить аналитику',
                 style: TextStyle(fontSize: 17),
               ),
@@ -108,14 +122,19 @@ class _Switchs extends StatelessWidget {
                 style: TextStyle(color: Colors.grey),
               ),
               trailing: Switch(
-                value: true,
-                onChanged: (v) {},
+                value: _switchValue,
+                onChanged: (bool newValue) {
+                  setState(() {
+                    _switchValue = newValue;
+                  });
+                  _saveSwitchValue(
+                      newValue); // Сохраняем новое состояние в SharedPreferences
+                },
                 inactiveTrackColor: Colors.transparent,
                 inactiveThumbColor: Colors.grey,
                 activeColor: Colors.white,
                 activeTrackColor: Colors.green,
               ),
-              onTap: () {},
             ),
           ],
         ),
