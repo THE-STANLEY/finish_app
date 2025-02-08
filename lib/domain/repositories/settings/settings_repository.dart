@@ -1,4 +1,4 @@
-import "package:myday/domain/repositories/settings/settings_repository_interface.dart";
+import "package:finish/domain/repositories/settings/settings_repository_interface.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 class SettingsRepository implements SettingsRepositoryInterface {
