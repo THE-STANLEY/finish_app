@@ -19,6 +19,7 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
   await Hive.initFlutter();
+
   runApp(
     MyDayApp(
       preferences: prefs,

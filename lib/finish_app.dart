@@ -4,6 +4,7 @@ import 'package:finish/router/router.dart';
 import 'package:finish/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
@@ -24,6 +25,16 @@ class MyDayApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
+            locale: Locale('ru', 'RU'), // Устанавливаем локаль
+            supportedLocales: [
+              Locale('en', 'US'),
+              Locale('ru', 'RU'),
+            ],
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
             theme: state.isDark ? darkTheme : lightTheme,
             initialRoute: '/main',
             routes: routes,

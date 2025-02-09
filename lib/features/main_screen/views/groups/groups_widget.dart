@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 import 'groups_model.dart';
 
@@ -36,42 +37,33 @@ class _GroupsWidgetBodyState extends State<_GroupsWidgetBody> {
     final groupsCount =
         GroupsModelProvider.of(context)?.model.groups.length ?? 0;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Папки', style: Theme.of(context).textTheme.titleMedium),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(50),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  DateFormat('d MMMM, yyyy', 'ru_RU').format(DateTime.now()),
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                Text(
+                  'Сегодня',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: Stack(
         children: [
+          Divider(height: 1),
           CustomScrollView(
             slivers: [
-              SliverAppBar(
-                pinned: true,
-                title: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    Text('Папки',
-                        style: Theme.of(context).textTheme.titleMedium),
-                    const SizedBox(height: 20),
-                  ],
-                ),
-                // bottom: PreferredSize(
-                //   preferredSize: const Size.fromHeight(80),
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(10.0),
-                //     child: Container(
-                //       decoration: BoxDecoration(
-                //           color: const Color.fromARGB(33, 158, 158, 158),
-                //           borderRadius: BorderRadius.circular(10)),
-                //       child: TextFormField(
-                //         decoration: const InputDecoration(
-                //             prefixIcon: Icon(Icons.search),
-                //             labelText: 'Поиск в задачах',
-                //             border: InputBorder.none,
-                //             enabledBorder: InputBorder.none,
-                //             focusedBorder: InputBorder.none,
-                //             contentPadding:
-                //                 EdgeInsets.symmetric(horizontal: 16)),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ),
               SliverList.separated(
                 separatorBuilder: (context, index) => const Divider(
                   height: 1,

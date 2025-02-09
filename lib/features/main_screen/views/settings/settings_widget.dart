@@ -212,19 +212,19 @@ class _Links extends StatelessWidget {
               }
             },
           ),
-          // Divider(height: 0.1),
-          // ListTile(
-          //   leading: SvgPicture.asset(
-          //     './assets/svg/star.svg',
-          //     width: 30,
-          //     height: 30,
-          //     color: Theme.of(context).brightness == Brightness.dark
-          //         ? const Color.fromARGB(153, 255, 255, 255)
-          //         : Colors.black,
-          //   ),
-          //   title: Text('Оценить приложение'),
-          //   trailing: Icon(Icons.arrow_forward_ios),
-          // ),
+          Divider(height: 0.1),
+          ListTile(
+            leading: SvgPicture.asset(
+              './assets/svg/star.svg',
+              width: 30,
+              height: 30,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? const Color.fromARGB(153, 255, 255, 255)
+                  : Colors.black,
+            ),
+            title: Text('Оценить приложение'),
+            trailing: Icon(Icons.arrow_forward_ios),
+          ),
         ],
       ),
     );
