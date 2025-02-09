@@ -1,10 +1,11 @@
-import 'package:finish/bloc/theme/theme_cubit.dart';
 import 'package:finish/version.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../core/bloc/theme/theme_cubit.dart';
 
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({super.key});

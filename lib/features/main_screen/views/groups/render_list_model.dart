@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../../domain/entity/group.dart';
-import '../../../../domain/entity/task.dart';
+import '../../../../core/domain/entity/group.dart';
+import '../../../../core/domain/entity/task.dart';
 
-class GroupsModel extends ChangeNotifier {
+class RenderListModel extends ChangeNotifier {
   var _groups = <Group>[];
   List<Group> get groups => _groups.toList();
 
   void showForm(BuildContext context) {
-    Navigator.of(context).pushNamed('/main/new_group');
+    Navigator.of(context).pushNamed('/main/action_new');
   }
 
   void showTasks(BuildContext context, int groupIndex) async {
@@ -22,7 +22,7 @@ class GroupsModel extends ChangeNotifier {
     Navigator.of(context).pushNamed('/main/tasks', arguments: groupKey);
   }
 
-  GroupsModel() {
+  RenderListModel() {
     _setup();
   }
 
@@ -53,9 +53,9 @@ class GroupsModel extends ChangeNotifier {
   }
 }
 
-class GroupsModelProvider extends InheritedNotifier {
-  final GroupsModel model;
-  const GroupsModelProvider({
+class RenderListModelProvider extends InheritedNotifier {
+  final RenderListModel model;
+  const RenderListModelProvider({
     super.key,
     required this.child,
     required this.model,
@@ -64,7 +64,8 @@ class GroupsModelProvider extends InheritedNotifier {
   @override
   final Widget child;
 
-  static GroupsModelProvider? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<GroupsModelProvider>();
+  static RenderListModelProvider? of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<RenderListModelProvider>();
   }
 }

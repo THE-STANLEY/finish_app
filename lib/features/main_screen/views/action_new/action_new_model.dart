@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../domain/entity/group.dart';
+import '../../../../core/domain/entity/group.dart';
 
-class NewGroupModel {
+class ActionNewModel {
   var groupName = '';
 
   void saveGroup(BuildContext context) async {
@@ -19,21 +19,21 @@ class NewGroupModel {
   }
 }
 
-class NewGroupModelProvider extends InheritedWidget {
-  final NewGroupModel model;
-  const NewGroupModelProvider(
+class ActionNewModelProvider extends InheritedWidget {
+  final ActionNewModel model;
+  const ActionNewModelProvider(
       {super.key, required this.child, required this.model})
       : super(child: child);
 
   @override
   final Widget child;
 
-  static NewGroupModelProvider? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<NewGroupModelProvider>();
+  static ActionNewModelProvider? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<ActionNewModelProvider>();
   }
 
   @override
-  bool updateShouldNotify(NewGroupModelProvider oldWidget) {
+  bool updateShouldNotify(ActionNewModelProvider oldWidget) {
     return true;
   }
 }

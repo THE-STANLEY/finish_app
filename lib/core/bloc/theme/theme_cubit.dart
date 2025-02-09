@@ -1,6 +1,7 @@
-import 'package:finish/domain/repositories/settings/settings_repository_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../domain/repositories/settings/settings_repository_interface.dart';
 
 part 'theme_state.dart';
 

@@ -1,12 +1,13 @@
-import 'package:finish/bloc/theme/theme_cubit.dart';
-import 'package:finish/domain/repositories/settings/settings_repository.dart';
-import 'package:finish/router/router.dart';
-import 'package:finish/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talker_flutter/talker_flutter.dart';
+
+import 'core/bloc/theme/theme_cubit.dart';
+import 'core/domain/repositories/settings/settings.dart';
+import 'core/router/router.dart';
+import 'core/ui/theme/theme.dart';
 
 class MyDayApp extends StatelessWidget {
   const MyDayApp({super.key, required this.preferences});

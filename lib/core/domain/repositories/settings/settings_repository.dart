@@ -1,5 +1,6 @@
-import "package:finish/domain/repositories/settings/settings_repository_interface.dart";
 import "package:shared_preferences/shared_preferences.dart";
+
+import "settings_repository_interface.dart";
 
 class SettingsRepository implements SettingsRepositoryInterface {
   SettingsRepository({required this.preferences});
