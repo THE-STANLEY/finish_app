@@ -21,8 +21,15 @@ class _ActionNewWidgetState extends State<ActionNewWidget> {
   }
 }
 
-class _ActionNewWidgetBody extends StatelessWidget {
+class _ActionNewWidgetBody extends StatefulWidget {
   const _ActionNewWidgetBody();
+
+  @override
+  State<_ActionNewWidgetBody> createState() => _ActionNewWidgetBodyState();
+}
+
+class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
+  final List<bool> _dayTimeSelected = [true, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +92,9 @@ class _ActionNewWidgetBody extends StatelessWidget {
                       color: const Color.fromARGB(33, 158, 158, 158),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
-                    onChanged: (v) {},
+                    onChanged: (value) => ActionNewModelProvider.of(context)
+                        ?.model
+                        .groupDesc = value,
                     decoration: const InputDecoration(
                         labelText: 'Описание',
                         border: InputBorder.none,
@@ -100,9 +109,11 @@ class _ActionNewWidgetBody extends StatelessWidget {
                       color: const Color.fromARGB(33, 158, 158, 158),
                       borderRadius: BorderRadius.circular(10)),
                   child: TextFormField(
-                    onChanged: (v) {},
+                    onChanged: (value) => ActionNewModelProvider.of(context)
+                        ?.model
+                        .groupTarget = value,
                     decoration: const InputDecoration(
-                        labelText: 'Конечный результат',
+                        labelText: 'Цель',
                         border: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
@@ -110,7 +121,77 @@ class _ActionNewWidgetBody extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text('Папка', style: Theme.of(context).textTheme.titleSmall),
+                Text('Прочее', style: Theme.of(context).textTheme.titleSmall),
+                SizedBox(height: 10),
+                Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(33, 158, 158, 158),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'Дата начала',
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16)),
+                  ),
+                ),
+                SizedBox(height: 15),
+                ToggleButtons(
+                  isSelected: _dayTimeSelected,
+                  onPressed: (int index) {
+                    setState(() {
+                      for (int i = 0; i < _dayTimeSelected.length; i++) {
+                        _dayTimeSelected[i] = i == index;
+                      }
+                    });
+                  },
+                  color: Colors.black54,
+                  selectedColor: Colors.black54,
+                  borderRadius: BorderRadius.circular(15),
+                  fillColor: const Color.fromARGB(50, 158, 158, 158),
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                      child: Text(
+                        'Весь день',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                      child: Text(
+                        'Часть дня',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                      child: Text(
+                        'Точный час',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                ListTile(
+                  title: Text(
+                    'Регулярная задача',
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  trailing: Switch(
+                    value: false,
+                    onChanged: (v) {},
+                    inactiveTrackColor: Colors.transparent,
+                    inactiveThumbColor: Colors.grey,
+                    activeColor: Colors.white,
+                    activeTrackColor: Colors.green,
+                  ),
+                ),
               ],
             ),
           ),

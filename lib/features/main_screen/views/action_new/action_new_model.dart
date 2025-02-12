@@ -5,6 +5,8 @@ import '../../../../core/domain/entity/group.dart';
 
 class ActionNewModel {
   var groupName = '';
+  var groupDesc = '';
+  var groupTarget = '';
 
   void saveGroup(BuildContext context) async {
     if (groupName.isEmpty) return;
@@ -12,7 +14,7 @@ class ActionNewModel {
       Hive.registerAdapter(GroupAdapter());
     }
     final box = await Hive.openBox<Group>('groups_box');
-    final task = Group(name: groupName);
+    final task = Group(name: groupName, desc: groupDesc, target: groupTarget);
     box.add(task);
 
     Navigator.of(context).pop();

@@ -20,6 +20,8 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   await Hive.initFlutter();
 
+  // await Hive.deleteBoxFromDisk('groups_box');
+
   runApp(
     MyDayApp(
       preferences: prefs,

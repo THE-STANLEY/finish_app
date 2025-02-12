@@ -149,6 +149,7 @@ class _RenderListRowWidget extends StatelessWidget {
           leading: Text('data'),
           title: Text(group.name,
               style: const TextStyle(fontWeight: FontWeight.w400)),
+          subtitle: Text(group.desc),
           onTap: () {
             final isDarkMode = Theme.of(context).brightness == Brightness.dark;
             showModalBottomSheet(
@@ -178,10 +179,10 @@ class _RenderListRowWidget extends StatelessWidget {
                         Text(group.name,
                             style: Theme.of(context).textTheme.titleMedium),
                         SizedBox(height: 10),
-                        Text('data',
+                        Text(group.desc,
                             style: Theme.of(context).textTheme.labelLarge),
                         SizedBox(height: 10),
-                        Text('Цель:',
+                        Text('Цель: ${group.target}',
                             style: Theme.of(context).textTheme.labelLarge),
                         Text('Время:',
                             style: Theme.of(context).textTheme.labelLarge),

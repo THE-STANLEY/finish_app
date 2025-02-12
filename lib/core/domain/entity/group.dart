@@ -1,7 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'task.dart';
-
 part 'group.g.dart';
 
 @HiveType(typeId: 1)
@@ -10,15 +8,14 @@ class Group extends HiveObject {
   String name;
 
   @HiveField(1)
-  HiveList<Task>? tasks;
+  String desc;
+
+  @HiveField(2)
+  String target;
 
   Group({
     required this.name,
+    required this.desc,
+    required this.target,
   });
-
-  void addTask(Box<Task> box, Task task) {
-    tasks ??= HiveList(box);
-    tasks?.add(task);
-    save();
-  }
 }

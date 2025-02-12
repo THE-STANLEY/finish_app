@@ -18,17 +18,21 @@ class GroupAdapter extends TypeAdapter<Group> {
     };
     return Group(
       name: fields[0] as String,
-    )..tasks = (fields[1] as HiveList?)?.castHiveList();
+      desc: fields[1] as String,
+      target: fields[2] as String,
+    );
   }
 
   @override
   void write(BinaryWriter writer, Group obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.tasks);
+      ..write(obj.desc)
+      ..writeByte(2)
+      ..write(obj.target);
   }
 
   @override
