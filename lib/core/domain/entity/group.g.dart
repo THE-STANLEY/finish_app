@@ -19,20 +19,32 @@ class GroupAdapter extends TypeAdapter<Group> {
     return Group(
       name: fields[0] as String,
       desc: fields[1] as String,
-      target: fields[2] as String,
+      target: fields[2] as String?,
+      date: fields[3] as String?,
+      dayPart: fields[4] as String,
+      regular: fields[5] as bool,
+      regularType: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Group obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
       ..write(obj.desc)
       ..writeByte(2)
-      ..write(obj.target);
+      ..write(obj.target)
+      ..writeByte(3)
+      ..write(obj.date)
+      ..writeByte(4)
+      ..write(obj.dayPart)
+      ..writeByte(5)
+      ..write(obj.regular)
+      ..writeByte(6)
+      ..write(obj.regularType);
   }
 
   @override

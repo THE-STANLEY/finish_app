@@ -39,15 +39,15 @@ final lightTheme = ThemeData(
 );
 
 final _textTheme = TextTheme(
-  titleLarge: TextStyle(
-    fontSize: 25,
-    fontWeight: FontWeight.bold,
-    color: Colors.orange,
-    fontFamily: 'MainStyle',
-  ),
-  titleMedium: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-  titleSmall: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-  labelLarge: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+  titleLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+  titleMedium: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+  titleSmall: TextStyle(
+      fontSize: 19,
+      fontWeight: FontWeight.bold,
+      color: const Color.fromARGB(141, 102, 101, 101)),
+  labelLarge: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
   labelMedium: TextStyle(
-      color: Colors.orange, fontSize: 17, fontWeight: FontWeight.normal),
+      color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),
+  labelSmall:
+      TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey),
 );

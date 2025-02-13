@@ -7,6 +7,10 @@ class ActionNewModel {
   var groupName = '';
   var groupDesc = '';
   var groupTarget = '';
+  var groupCreateDate = '';
+  var groupdayPart = 'Весь день';
+  bool groupRegular = false;
+  var groupRegularType = '';
 
   void saveGroup(BuildContext context) async {
     if (groupName.isEmpty) return;
@@ -14,7 +18,15 @@ class ActionNewModel {
       Hive.registerAdapter(GroupAdapter());
     }
     final box = await Hive.openBox<Group>('groups_box');
-    final task = Group(name: groupName, desc: groupDesc, target: groupTarget);
+    final task = Group(
+      name: groupName,
+      desc: groupDesc,
+      target: groupTarget,
+      date: groupCreateDate,
+      dayPart: groupdayPart,
+      regular: groupRegular,
+      regularType: groupRegularType,
+    );
     box.add(task);
 
     Navigator.of(context).pop();

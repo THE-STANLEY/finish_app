@@ -38,7 +38,7 @@ class _RenderListWidgetBodyState extends State<_RenderListWidgetBody> {
         RenderListModelProvider.of(context)?.model.groups.length ?? 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Задачи', style: Theme.of(context).textTheme.titleMedium),
+        title: Text('Задачи', style: Theme.of(context).textTheme.titleLarge),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),
           child: Padding(
@@ -146,10 +146,32 @@ class _RenderListRowWidget extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          leading: Text('data'),
-          title: Text(group.name,
-              style: const TextStyle(fontWeight: FontWeight.w400)),
-          subtitle: Text(group.desc),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                group.dayPart,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+              Text(
+                group.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          subtitle: Text(
+            group.desc,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+          trailing: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.circle_outlined),
+            iconSize: 30,
+          ),
           onTap: () {
             final isDarkMode = Theme.of(context).brightness == Brightness.dark;
             showModalBottomSheet(
@@ -177,19 +199,55 @@ class _RenderListRowWidget extends StatelessWidget {
                           ],
                         ),
                         Text(group.name,
-                            style: Theme.of(context).textTheme.titleMedium),
-                        SizedBox(height: 10),
+                            style: Theme.of(context).textTheme.titleLarge),
+                        SizedBox(height: 5),
                         Text(group.desc,
                             style: Theme.of(context).textTheme.labelLarge),
-                        SizedBox(height: 10),
-                        Text('Цель: ${group.target}',
-                            style: Theme.of(context).textTheme.labelLarge),
-                        Text('Время:',
-                            style: Theme.of(context).textTheme.labelLarge),
-                        Text('Регулярность:',
-                            style: Theme.of(context).textTheme.labelLarge),
-                        Text('Начата:',
-                            style: Theme.of(context).textTheme.labelLarge),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Text(
+                              'Цель:',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            SizedBox(width: 5),
+                            Text('${group.target}',
+                                style: Theme.of(context).textTheme.labelLarge),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Время:',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            SizedBox(width: 5),
+                            Text(group.dayPart,
+                                style: Theme.of(context).textTheme.labelLarge),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Регулярность:',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            SizedBox(width: 5),
+                            Text('${group.regularType}',
+                                style: Theme.of(context).textTheme.labelLarge),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Начата:',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            SizedBox(width: 5),
+                            Text('${group.date}',
+                                style: Theme.of(context).textTheme.labelLarge),
+                          ],
+                        ),
                         SizedBox(height: 20),
                         Row(
                           children: [
@@ -197,27 +255,27 @@ class _RenderListRowWidget extends StatelessWidget {
                               child: FloatingActionButton(
                                 onPressed: () {},
                                 backgroundColor: Colors.orange,
-                                child: Text('Выполнить',
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge),
+                                child: Text(
+                                  'Выполнить',
+                                  style: TextStyle(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                backgroundColor: Colors.red,
-                                child: Text('Удалить',
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge),
-                              ),
-                            ),
-                          ],
-                        ),
+                        SizedBox(height: 15),
+                        Center(
+                          child: InkWell(
+                            child: Text('Удалить',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 17,
+                                )),
+                          ),
+                        )
                       ],
                     ),
                   ),

@@ -28,8 +28,7 @@ class _SettingsWidgetBodyState extends State<_SettingsWidgetBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('Настройки', style: Theme.of(context).textTheme.titleMedium),
+        title: Text('Настройки', style: Theme.of(context).textTheme.titleLarge),
       ),
       body: ListView(
         children: [
@@ -93,7 +92,7 @@ class _SwitchsState extends State<_Switchs> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text('Основное',
-                  style: Theme.of(context).textTheme.titleSmall),
+                  style: Theme.of(context).textTheme.titleMedium),
             ),
             ListTile(
               title: Text(
@@ -169,7 +168,7 @@ class _Links extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child:
-                Text('Ссылки', style: Theme.of(context).textTheme.titleSmall),
+                Text('Ссылки', style: Theme.of(context).textTheme.titleMedium),
           ),
           ListTile(
             leading: SvgPicture.asset(

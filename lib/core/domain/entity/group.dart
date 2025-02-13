@@ -11,11 +11,27 @@ class Group extends HiveObject {
   String desc;
 
   @HiveField(2)
-  String target;
+  String? target;
+
+  @HiveField(3)
+  String? date;
+
+  @HiveField(4)
+  String dayPart;
+
+  @HiveField(5)
+  bool regular;
+
+  @HiveField(6)
+  String? regularType;
 
   Group({
     required this.name,
     required this.desc,
-    required this.target,
+    this.target,
+    this.date,
+    required this.dayPart,
+    required this.regular,
+    this.regularType,
   });
 }
