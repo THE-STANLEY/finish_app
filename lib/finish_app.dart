@@ -37,7 +37,7 @@ class MyDayApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             theme: state.isDark ? darkTheme : lightTheme,
-            initialRoute: '/main',
+            initialRoute: '/',
             routes: routes,
             navigatorObservers: [TalkerRouteObserver(Talker())],
           );

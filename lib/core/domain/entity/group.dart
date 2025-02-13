@@ -25,6 +25,9 @@ class Group extends HiveObject {
   @HiveField(6)
   String? regularType;
 
+  @HiveField(7)
+  bool isDone;
+
   Group({
     required this.name,
     required this.desc,
@@ -33,5 +36,6 @@ class Group extends HiveObject {
     required this.dayPart,
     required this.regular,
     this.regularType,
+    required this.isDone,
   });
 }

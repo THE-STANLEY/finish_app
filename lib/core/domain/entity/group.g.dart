@@ -24,13 +24,14 @@ class GroupAdapter extends TypeAdapter<Group> {
       dayPart: fields[4] as String,
       regular: fields[5] as bool,
       regularType: fields[6] as String?,
+      isDone: fields[7] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Group obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class GroupAdapter extends TypeAdapter<Group> {
       ..writeByte(5)
       ..write(obj.regular)
       ..writeByte(6)
-      ..write(obj.regularType);
+      ..write(obj.regularType)
+      ..writeByte(7)
+      ..write(obj.isDone);
   }
 
   @override

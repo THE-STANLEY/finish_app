@@ -253,7 +253,11 @@ class _RenderListRowWidget extends StatelessWidget {
                           children: [
                             Expanded(
                               child: FloatingActionButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  // RenderListModelProvider.of(context)!
+                                  //     .model
+                                  //     .doneToggle(indexInList);
+                                },
                                 backgroundColor: Colors.orange,
                                 child: Text(
                                   'Выполнить',

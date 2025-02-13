@@ -11,6 +11,7 @@ class ActionNewModel {
   var groupdayPart = 'Весь день';
   bool groupRegular = false;
   var groupRegularType = '';
+  bool isDone = false;
 
   void saveGroup(BuildContext context) async {
     if (groupName.isEmpty) return;
@@ -26,6 +27,7 @@ class ActionNewModel {
       dayPart: groupdayPart,
       regular: groupRegular,
       regularType: groupRegularType,
+      isDone: isDone,
     );
     box.add(task);
 

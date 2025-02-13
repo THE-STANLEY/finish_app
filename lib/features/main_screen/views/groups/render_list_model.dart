@@ -23,6 +23,14 @@ class RenderListModel extends ChangeNotifier {
     await box.deleteAt(groupIndex);
   }
 
+  void doneToggle(int groupIndex) async {
+    final task = _groups[groupIndex];
+    final currentState = _groups[groupIndex].isDone ?? false;
+    task.isDone = !currentState;
+    await task.save();
+    notifyListeners();
+  }
+
   void _setup() async {
     if (!Hive.isAdapterRegistered(1)) {
       Hive.registerAdapter(GroupAdapter());
