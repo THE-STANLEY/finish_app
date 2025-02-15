@@ -121,6 +121,20 @@ class _RenderListRowWidget extends StatelessWidget {
           : Colors.white,
     );
 
+    final task = RenderListModelProvider.of(context)!.model.groups[indexInList];
+
+    final icon = task.isDone
+        ? SvgPicture.asset(
+            './assets/svg/isDone.svg',
+            height: 30,
+          )
+        : SvgPicture.asset(
+            './assets/svg/Checkbox.svg',
+            height: 30,
+          );
+
+    final isDoneStyle = TextStyle(decoration: TextDecoration.lineThrough);
+
     return Container(
       decoration: listStyle,
       child: Slidable(
@@ -151,13 +165,17 @@ class _RenderListRowWidget extends StatelessWidget {
             children: [
               Text(
                 group.dayPart,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: task.isDone
+                    ? isDoneStyle
+                    : Theme.of(context).textTheme.labelMedium,
               ),
               Text(
                 group.name,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: task.isDone
+                    ? isDoneStyle
+                    : const TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -165,11 +183,21 @@ class _RenderListRowWidget extends StatelessWidget {
             group.desc,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.labelSmall,
+            style: task.isDone
+                ? isDoneStyle
+                : Theme.of(context).textTheme.labelSmall,
           ),
           trailing: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.circle_outlined),
+            onPressed: () {
+              if (task.isDone) {
+                null;
+              } else {
+                RenderListModelProvider.of(context)!
+                    .model
+                    .doneToggle(indexInList);
+              }
+            },
+            icon: icon,
             iconSize: 30,
           ),
           onTap: () {
@@ -179,6 +207,7 @@ class _RenderListRowWidget extends StatelessWidget {
                   ? const Color.fromARGB(255, 22, 21, 21)
                   : Colors.white,
               context: context,
+              isScrollControlled: false,
               builder: (BuildContext context) {
                 return SizedBox(
                   width: double.infinity,
@@ -199,22 +228,25 @@ class _RenderListRowWidget extends StatelessWidget {
                           ],
                         ),
                         Text(group.name,
-                            style: Theme.of(context).textTheme.titleLarge),
+                            style: Theme.of(context).textTheme.titleLarge,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis),
                         SizedBox(height: 5),
-                        Text(group.desc,
-                            style: Theme.of(context).textTheme.labelLarge),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Text(
-                              'Цель:',
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            SizedBox(width: 5),
-                            Text('${group.target}',
-                                style: Theme.of(context).textTheme.labelLarge),
-                          ],
-                        ),
+                        if (group.desc.isNotEmpty) ...[
+                          Text(
+                            group.desc,
+                            style: Theme.of(context).textTheme.labelLarge,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 5),
+                        ],
+                        if (group.target?.isNotEmpty ?? false) ...[
+                          Text('${group.target}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context).textTheme.labelLarge),
+                        ],
                         Row(
                           children: [
                             Text(
@@ -226,41 +258,54 @@ class _RenderListRowWidget extends StatelessWidget {
                                 style: Theme.of(context).textTheme.labelLarge),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              'Регулярность:',
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            SizedBox(width: 5),
-                            Text('${group.regularType}',
-                                style: Theme.of(context).textTheme.labelLarge),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Начата:',
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-                            SizedBox(width: 5),
-                            Text('${group.date}',
-                                style: Theme.of(context).textTheme.labelLarge),
-                          ],
-                        ),
+                        if (group.regularType?.isNotEmpty ?? false) ...[
+                          Row(
+                            children: [
+                              Text(
+                                'Регулярность:',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              SizedBox(width: 5),
+                              Text('${group.regularType}',
+                                  style:
+                                      Theme.of(context).textTheme.labelLarge),
+                            ],
+                          ),
+                        ],
+                        if (group.date?.isNotEmpty ?? false) ...[
+                          Row(
+                            children: [
+                              Text(
+                                'Начата:',
+                                style: Theme.of(context).textTheme.titleSmall,
+                                maxLines: 1,
+                              ),
+                              SizedBox(width: 5),
+                              Text('${group.date}',
+                                  style:
+                                      Theme.of(context).textTheme.labelLarge),
+                            ],
+                          ),
+                        ],
                         SizedBox(height: 20),
                         Row(
                           children: [
                             Expanded(
                               child: FloatingActionButton(
                                 onPressed: () {
-                                  // RenderListModelProvider.of(context)!
-                                  //     .model
-                                  //     .doneToggle(indexInList);
+                                  if (task.isDone) {
+                                    null;
+                                  } else {
+                                    RenderListModelProvider.of(context)!
+                                        .model
+                                        .doneToggle(indexInList);
+                                  }
                                 },
-                                backgroundColor: Colors.orange,
+                                backgroundColor: task.isDone
+                                    ? const Color.fromARGB(255, 238, 174, 78)
+                                    : Colors.orange,
                                 child: Text(
-                                  'Выполнить',
+                                  task.isDone ? 'Выполнено' : 'Выполнить',
                                   style: TextStyle(
                                       fontSize: 19,
                                       fontWeight: FontWeight.bold,
@@ -273,11 +318,18 @@ class _RenderListRowWidget extends StatelessWidget {
                         SizedBox(height: 15),
                         Center(
                           child: InkWell(
-                            child: Text('Удалить',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 17,
-                                )),
+                            onTap: () {
+                              RenderListModelProvider.of(context)
+                                  ?.model
+                                  .deleteGroup(indexInList);
+                            },
+                            child: Text(
+                              'Удалить',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 17,
+                              ),
+                            ),
                           ),
                         )
                       ],
