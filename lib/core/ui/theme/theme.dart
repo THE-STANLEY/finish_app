@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final darkTheme = ThemeData(
   useMaterial3: true,
@@ -39,15 +40,15 @@ final lightTheme = ThemeData(
 );
 
 final _textTheme = TextTheme(
-  titleLarge: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-  titleMedium: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+  titleLarge: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+  titleMedium: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold),
   titleSmall: TextStyle(
-      fontSize: 19,
+      fontSize: 19.sp,
       fontWeight: FontWeight.bold,
       color: const Color.fromARGB(141, 102, 101, 101)),
-  labelLarge: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+  labelLarge: TextStyle(fontSize: 19.sp, fontWeight: FontWeight.bold),
   labelMedium: TextStyle(
-      color: Colors.orange, fontSize: 17, fontWeight: FontWeight.bold),
-  labelSmall:
-      TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.grey),
+      color: Colors.orange, fontSize: 17.sp, fontWeight: FontWeight.bold),
+  labelSmall: TextStyle(
+      fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.grey),
 );

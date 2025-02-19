@@ -21,6 +21,7 @@ class RenderListModel extends ChangeNotifier {
     }
     final box = await Hive.openBox<Group>('groups_box');
     await box.deleteAt(groupIndex);
+    notifyListeners();
   }
 
   void doneToggle(int groupIndex) async {
