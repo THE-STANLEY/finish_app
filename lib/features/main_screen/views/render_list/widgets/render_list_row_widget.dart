@@ -1,4 +1,4 @@
-import 'package:finish/core/domain/entity/group.dart';
+import 'package:finish/core/domain/entity/task.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,8 +11,7 @@ class RenderListRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final group =
-        RenderListModelProvider.of(context)!.model.groups[indexInList];
+    final group = RenderListModelProvider.of(context)!.model.tasks[indexInList];
 
     final listStyle = BoxDecoration(
       color: Theme.of(context).brightness == Brightness.dark
@@ -20,7 +19,7 @@ class RenderListRowWidget extends StatelessWidget {
           : Colors.white,
     );
 
-    final task = RenderListModelProvider.of(context)!.model.groups[indexInList];
+    final task = RenderListModelProvider.of(context)!.model.tasks[indexInList];
 
     final icon = task.isDone
         ? SvgPicture.asset(
@@ -79,14 +78,15 @@ class RenderListRowWidget extends StatelessWidget {
         ),
         onTap: () {
           final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-          _showModalBottomSheet(isDarkMode, context, group, task);
+          _showModalBottomSheet(isDarkMode, context, task);
         },
       ),
     );
   }
 
   Future<dynamic> _showModalBottomSheet(
-      bool isDarkMode, BuildContext context, Group group, Group task) {
+      bool isDarkMode, BuildContext context, Task task) {
+    final model = RenderListModelProvider.of(context)!.model;
     return showModalBottomSheet(
       backgroundColor:
           isDarkMode ? const Color.fromARGB(255, 22, 21, 21) : Colors.white,
@@ -112,22 +112,22 @@ class RenderListRowWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text(group.name,
+                Text(task.name,
                     style: Theme.of(context).textTheme.titleLarge,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis),
                 SizedBox(height: 5.h),
-                if (group.desc.isNotEmpty) ...[
+                if (task.desc.isNotEmpty) ...[
                   Text(
-                    group.desc,
+                    task.desc,
                     style: Theme.of(context).textTheme.labelLarge,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(height: 5.h),
                 ],
-                if (group.target?.isNotEmpty ?? false) ...[
-                  Text('${group.target}',
+                if (task.target?.isNotEmpty ?? false) ...[
+                  Text('${task.target}',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.labelLarge),
@@ -139,11 +139,11 @@ class RenderListRowWidget extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     SizedBox(width: 5.w),
-                    Text(group.dayPart,
+                    Text(task.dayPart,
                         style: Theme.of(context).textTheme.labelLarge),
                   ],
                 ),
-                if (group.regularType?.isNotEmpty ?? false) ...[
+                if (task.regularType?.isNotEmpty ?? false) ...[
                   Row(
                     children: [
                       Text(
@@ -151,12 +151,12 @@ class RenderListRowWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       SizedBox(width: 5.w),
-                      Text('${group.regularType}',
+                      Text('${task.regularType}',
                           style: Theme.of(context).textTheme.labelLarge),
                     ],
                   ),
                 ],
-                if (group.date?.isNotEmpty ?? false) ...[
+                if (task.date?.isNotEmpty ?? false) ...[
                   Row(
                     children: [
                       Text(
@@ -165,7 +165,7 @@ class RenderListRowWidget extends StatelessWidget {
                         maxLines: 1,
                       ),
                       SizedBox(width: 5.w),
-                      Text('${group.date}',
+                      Text('${task.date}',
                           style: Theme.of(context).textTheme.labelLarge),
                     ],
                   ),
@@ -179,9 +179,8 @@ class RenderListRowWidget extends StatelessWidget {
                           if (task.isDone) {
                             null;
                           } else {
-                            RenderListModelProvider.of(context)
-                                ?.model
-                                .doneToggle(indexInList);
+                            model.doneToggle(indexInList);
+                            Navigator.pop(context);
                           }
                         },
                         backgroundColor: task.isDone
@@ -200,11 +199,10 @@ class RenderListRowWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 Center(
-                  child: InkWell(
-                    onTap: () {
-                      RenderListModelProvider.of(context)
-                          ?.model
-                          .deleteGroup(indexInList);
+                  child: TextButton(
+                    onPressed: () {
+                      model.deleteTask(indexInList);
+                      Navigator.pop(context);
                     },
                     child: Text(
                       'Удалить',

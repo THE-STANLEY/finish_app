@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../../../core/domain/entity/group.dart';
+import '../../../../core/domain/entity/task.dart';
 
 class ActionNewModel {
   var groupName = '';
@@ -16,10 +16,10 @@ class ActionNewModel {
   void saveGroup(BuildContext context) async {
     if (groupName.isEmpty) return;
     if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(GroupAdapter());
+      Hive.registerAdapter(TaskAdapter());
     }
-    final box = await Hive.openBox<Group>('groups_box');
-    final task = Group(
+    final box = await Hive.openBox<Task>('tasks_box');
+    final task = Task(
       name: groupName,
       desc: groupDesc,
       target: groupTarget,

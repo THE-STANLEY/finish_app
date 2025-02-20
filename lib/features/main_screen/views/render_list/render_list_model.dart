@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../../core/domain/entity/group.dart';
+import '../../../../core/domain/entity/task.dart';
 
 class RenderListModel extends ChangeNotifier {
-  var _groups = <Group>[];
-  List<Group> get groups => _groups.toList();
+  var _tasks = <Task>[];
+  List<Task> get tasks => _tasks.toList();
 
   void showForm(BuildContext context) {
     Navigator.of(context).pushNamed('/main/action_new');
@@ -15,18 +15,18 @@ class RenderListModel extends ChangeNotifier {
     _setup();
   }
 
-  void deleteGroup(int groupIndex) async {
+  void deleteTask(int taskIndex) async {
     if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(GroupAdapter());
+      Hive.registerAdapter(TaskAdapter());
     }
-    final box = await Hive.openBox<Group>('groups_box');
-    await box.deleteAt(groupIndex);
+    final box = await Hive.openBox<Task>('tasks_box');
+    await box.deleteAt(taskIndex);
     notifyListeners();
   }
 
-  void doneToggle(int groupIndex) async {
-    final task = _groups[groupIndex];
-    final currentState = _groups[groupIndex].isDone;
+  void doneToggle(int taskIndex) async {
+    final task = _tasks[taskIndex];
+    final currentState = _tasks[taskIndex].isDone;
     task.isDone = !currentState;
     await task.save();
     notifyListeners();
@@ -34,13 +34,13 @@ class RenderListModel extends ChangeNotifier {
 
   void _setup() async {
     if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(GroupAdapter());
+      Hive.registerAdapter(TaskAdapter());
     }
-    final box = await Hive.openBox<Group>('groups_box');
-    _groups = box.values.toList();
+    final box = await Hive.openBox<Task>('tasks_box');
+    _tasks = box.values.toList();
     notifyListeners();
     box.listenable().addListener(() {
-      _groups = box.values.toList();
+      _tasks = box.values.toList();
       notifyListeners();
     });
   }

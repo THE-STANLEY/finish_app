@@ -15,8 +15,8 @@ class RenderListWidgetBody extends StatefulWidget {
 class RenderListWidgetBodyState extends State<RenderListWidgetBody> {
   @override
   Widget build(BuildContext context) {
-    final groupsCount =
-        RenderListModelProvider.of(context)?.model.groups.length ?? 0;
+    final tasksCount =
+        RenderListModelProvider.of(context)?.model.tasks.length ?? 0;
     return Scaffold(
       appBar: AppBar(
         title: Text('Задачи', style: Theme.of(context).textTheme.titleLarge),
@@ -49,14 +49,14 @@ class RenderListWidgetBodyState extends State<RenderListWidgetBody> {
                 separatorBuilder: (context, index) => const Divider(
                   height: 1,
                 ),
-                itemCount: groupsCount,
+                itemCount: tasksCount,
                 itemBuilder: (context, index) {
                   return RenderListRowWidget(indexInList: index);
                 },
               ),
             ],
           ),
-          if (groupsCount == 0) ...[
+          if (tasksCount == 0) ...[
             Center(
               child: SvgPicture.asset(
                 './assets/svg/successful.svg',

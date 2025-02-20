@@ -1,9 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-part 'group.g.dart';
+part 'task.g.dart';
 
 @HiveType(typeId: 1)
-class Group extends HiveObject {
+class Task extends HiveObject {
   @HiveField(0)
   String name;
 
@@ -28,7 +28,7 @@ class Group extends HiveObject {
   @HiveField(7)
   bool isDone;
 
-  Group({
+  Task({
     required this.name,
     required this.desc,
     this.target,

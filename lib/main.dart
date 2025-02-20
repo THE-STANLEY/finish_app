@@ -21,7 +21,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   await Hive.initFlutter();
 
-  // await Hive.deleteBoxFromDisk('groups_box');
+  // await Hive.deleteBoxFromDisk('tasks_box');
 
   runApp(ScreenUtilInit(
     designSize: Size(360, 640),
