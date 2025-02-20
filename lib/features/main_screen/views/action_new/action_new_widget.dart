@@ -181,7 +181,14 @@ class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
                               child: Text(
                                 'Весь день',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color.fromARGB(153, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          255, 109, 108, 108),
+                                ),
                               ),
                             ),
                           ),
@@ -191,7 +198,14 @@ class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
                               child: Text(
                                 'Часть дня',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color.fromARGB(153, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          255, 109, 108, 108),
+                                ),
                               ),
                             ),
                           ),
@@ -201,7 +215,14 @@ class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
                               child: Text(
                                 'Точный час',
                                 style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color.fromARGB(153, 255, 255, 255)
+                                      : const Color.fromARGB(
+                                          255, 109, 108, 108),
+                                ),
                               ),
                             ),
                           ),
@@ -247,6 +268,10 @@ class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
                           leading: SvgPicture.asset(
                             './assets/svg/Clock.svg',
                             height: 30,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? const Color.fromARGB(153, 255, 255, 255)
+                                    : Colors.black,
                           ),
                           title: Text('Каждый день'),
                           trailing: _regularSelectedIndex == 0
@@ -265,6 +290,10 @@ class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
                           leading: SvgPicture.asset(
                             './assets/svg/Clock.svg',
                             height: 30,
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? const Color.fromARGB(153, 255, 255, 255)
+                                    : Colors.black,
                           ),
                           title: Text('По будням'),
                           trailing: _regularSelectedIndex == 1
@@ -283,7 +312,7 @@ class _ActionNewWidgetBodyState extends State<_ActionNewWidgetBody> {
 }
 
 class _ButtonsDayTimesGroup extends StatefulWidget {
-  const _ButtonsDayTimesGroup({super.key});
+  const _ButtonsDayTimesGroup();
 
   @override
   State<_ButtonsDayTimesGroup> createState() => _ButtonsDayTimesGroupState();
@@ -325,10 +354,19 @@ class _ButtonsDayTimesGroupState extends State<_ButtonsDayTimesGroup> {
               SvgPicture.asset(
                 './assets/svg/morning.svg',
                 height: 30,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(153, 255, 255, 255)
+                    : Colors.black,
               ),
               Text(
                 'Утро',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(153, 255, 255, 255)
+                      : const Color.fromARGB(255, 109, 108, 108),
+                ),
               ),
             ],
           ),
@@ -340,10 +378,19 @@ class _ButtonsDayTimesGroupState extends State<_ButtonsDayTimesGroup> {
               SvgPicture.asset(
                 './assets/svg/day.svg',
                 height: 30,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(153, 255, 255, 255)
+                    : Colors.black,
               ),
               Text(
                 'День',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(153, 255, 255, 255)
+                      : const Color.fromARGB(255, 109, 108, 108),
+                ),
               ),
             ],
           ),
@@ -355,10 +402,19 @@ class _ButtonsDayTimesGroupState extends State<_ButtonsDayTimesGroup> {
               SvgPicture.asset(
                 './assets/svg/evening.svg',
                 height: 30,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(153, 255, 255, 255)
+                    : Colors.black,
               ),
               Text(
                 'Вечер',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(153, 255, 255, 255)
+                      : const Color.fromARGB(255, 109, 108, 108),
+                ),
               ),
             ],
           ),
@@ -370,10 +426,19 @@ class _ButtonsDayTimesGroupState extends State<_ButtonsDayTimesGroup> {
               SvgPicture.asset(
                 './assets/svg/night.svg',
                 height: 30,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(153, 255, 255, 255)
+                    : Colors.black,
               ),
               Text(
                 'Ночь',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(153, 255, 255, 255)
+                      : const Color.fromARGB(255, 109, 108, 108),
+                ),
               ),
             ],
           ),
@@ -384,7 +449,7 @@ class _ButtonsDayTimesGroupState extends State<_ButtonsDayTimesGroup> {
 }
 
 class _ButtonsDayPartTimesGroup extends StatelessWidget {
-  const _ButtonsDayPartTimesGroup({super.key});
+  const _ButtonsDayPartTimesGroup();
 
   @override
   Widget build(BuildContext context) {

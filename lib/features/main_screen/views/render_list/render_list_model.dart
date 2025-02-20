@@ -26,7 +26,7 @@ class RenderListModel extends ChangeNotifier {
 
   void doneToggle(int groupIndex) async {
     final task = _groups[groupIndex];
-    final currentState = _groups[groupIndex].isDone ?? false;
+    final currentState = _groups[groupIndex].isDone;
     task.isDone = !currentState;
     await task.save();
     notifyListeners();
